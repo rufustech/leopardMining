@@ -51,7 +51,7 @@ export default function LeopardMining() {
       "Leopard Mining (Pvt) Ltd is a Zimbabwean geological consultancy delivering high‑quality, cost‑effective and technically sound solutions across Africa and beyond.",
     mission:
       "Provide world‑class geological and mining solutions built on integrity, innovation, collaboration and measurable client value.",
-    vision: "To be a leading geological consultancy in Zimbabwe and beyond.",
+    vision: "To be a leading geological consultancy in Africa and beyond.",
   };
 
   const geographies = [
@@ -68,7 +68,7 @@ export default function LeopardMining() {
     {
       icon: <ClipboardList className="w-5 h-5" />,
       title: "Expert Geological Advice",
-      desc: "Independent advice, project diligence and concept studies informed by regional experience.",
+      desc: "Independent advice, project due diligence informed by regional experience.",
     },
     {
       icon: <Layers className="w-5 h-5" />,
@@ -83,7 +83,7 @@ export default function LeopardMining() {
     {
       icon: <Briefcase className="w-5 h-5" />,
       title: "Feasibility Support",
-      desc: "Inputs for scoping/pre‑feasibility, technical options and risk registers.",
+      desc: "Inputs for scoping/pre‑feasibility, technical assessments and risk registers.",
     },
     {
       icon: <Users className="w-5 h-5" />,
@@ -101,6 +101,11 @@ export default function LeopardMining() {
     "Graphite",
     "Limestone",
     "Coal",
+    "Diamond",
+    "Emerald",
+    "Copper",
+    "Nickel",
+    "Iron",
   ];
 
   const values = [
@@ -122,14 +127,14 @@ export default function LeopardMining() {
     },
     {
       title: "Adaptability",
-      desc: "Fit‑for‑purpose solutions across terrains and jurisdictions.",
+      desc: "Fit‑for‑purpose solutions across various terrains and jurisdictions.",
     },
   ];
 
   const team = [
     { name: "Samuel Bakasa", role: "Director" },
     { name: "Edmore Marima", role: "Exploration Manager" },
-    { name: "Samuel Bakasa", role: "Exploration Geologist" },
+    { name: "Munashe Mugwagwa", role: "Exploration Geologist" },
   ];
 
   const contacts = {
@@ -406,11 +411,13 @@ export default function LeopardMining() {
                 "Target generation & prospecting permits",
                 "Tenement & data management",
                 "Exploration program leadership",
-                "Diamond/core drilling supervision",
+                "Diamond/RC drilling supervision",
                 "Underground & surface mapping",
-                "Channel sampling & QA/QC",
+                "Sampling & QAQC",
                 "Resource/ore‑body modelling",
                 "Project management & reporting",
+                "Geophysics",
+                "Drone surveys",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <CheckCircle2
@@ -507,7 +514,7 @@ export default function LeopardMining() {
           <div className="mb-6 flex items-center gap-3">
             <Globe2 className="h-6 w-6" />
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
-              Where We Operate
+              Global Presence
             </h2>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -752,7 +759,7 @@ export default function LeopardMining() {
             style={{ color: palette.muted }}
           >
             <span></span>
-            <span>Made by Rufaro Mucheri</span>
+            <span>Developed by Rufaro Mucheri</span>
           </div>
         </div>
       </footer>
