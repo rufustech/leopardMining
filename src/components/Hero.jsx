@@ -14,6 +14,8 @@ import {
   Compass,
   ChevronUp,
 } from "lucide-react";
+import { image } from "framer-motion/client";
+import { edmore, munashe, sam } from "../assets";
 
 /* =========================================================
    Leopard Mining — One‑Page Site (Single Component)
@@ -132,9 +134,9 @@ export default function LeopardMining() {
   ];
 
   const team = [
-    { name: "Samuel Bakasa", role: "Director" },
-    { name: "Edmore Marima", role: "Exploration Manager" },
-    { name: "Munashe Mugwagwa", role: "Exploration Geologist" },
+    { name: "Samuel Bakasa", role: "Director", image: sam },
+    { name: "Edmore Marima", role: "Exploration Manager", image: edmore },
+    { name: "Munashe Mugwagwa", role: "Exploration Geologist", image: munashe },
   ];
 
   const contacts = {
@@ -571,23 +573,25 @@ export default function LeopardMining() {
             {team.map((m, idx) => (
               <div
                 key={`${m.name}-${idx}`}
-                className="rounded-3xl border p-6 flex items-center gap-4"
+                className="rounded-3xl border p-5 flex items-center gap-4"
                 style={{
                   borderColor: palette.ring,
                   background: palette.surface,
                 }}
               >
                 <div
-                  className="h-12 w-12 rounded-xl grid place-items-center font-bold"
+                  className="h-16 w-16 bg-[#111214] rounded-full grid place-items-center font-bold"
                   style={{
-                    background: "rgba(212,175,55,0.12)",
+                    background: "#111214",
                     color: palette.primary,
                   }}
                 >
-                  {m.name
-                    .split(" ")
-                    .map((p) => p[0])
-                    .join("")}
+                  <img
+                    className="rounded-full bg-gray-300"
+                    src={m.image}
+                    alt=""
+                    srcset=""
+                  />
                 </div>
                 <div>
                   <div className="font-semibold">{m.name}</div>
