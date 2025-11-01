@@ -9,10 +9,12 @@ import mining3 from "./images/mining3.jpg";
 import mining4 from "./images/mining4.jpg";
 import mining5 from "./images/mining5.jpg";
 import mining6 from "./images/mining6.jpg";
+import logo2 from "./images/logo2.png";
 
 export {
   sam,
   edmore,
+  logo2,
   munashe,
   mining1,
   mining2,

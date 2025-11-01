@@ -19,6 +19,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import {
   edmore,
+  logo2,
   mineeng,
   mining1,
   mining2,
@@ -287,10 +288,10 @@ export default function LeopardMining() {
         <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div
-              className="h-9 w-9 rounded-xl flex items-center justify-center font-black"
-              style={{ background: palette.primary, color: "#141414" }}
+              className="h-8 w-20 rounded-xl flex items-center justify-center font-black"
+              // style={{ background: palette.primary, color: "#141414" }}
             >
-              LM
+              <img src={logo2} alt="LM" />
             </div>
             <div className="leading-tight">
               <div className="font-semibold tracking-tight">Leopard Mining</div>
