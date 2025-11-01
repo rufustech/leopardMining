@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Phone,
   Mail,
@@ -13,30 +13,57 @@ import {
   Briefcase,
   Compass,
   ChevronUp,
+  X,
+  Image as ImageIcon,
 } from "lucide-react";
-import { image } from "framer-motion/client";
-import { edmore, munashe, sam } from "../assets";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  edmore,
+  mineeng,
+  mining1,
+  mining2,
+  mining3,
+  mining4,
+  mining5,
+  mining6,
+  munashe,
+  sam,
+} from "../assets";
 
 /* =========================================================
-   Leopard Mining — One‑Page Site (Single Component)
+   Leopard Mining — One-Page Site (Single Component)
    - Modern, premium UI using TailwindCSS utility classes
-   - No external state mgmt; all content/data inline below
-   - Sections: Hero • About • Services • Commodities • Reach • Values • Team • Policies • Contact
-   - Sticky nav, scroll spy, smooth scrolling, glass cards, CTA widget, back‑to‑top
+   - Single exported component with embedded Gallery + Modal
+   - Sections: Hero • About • Services • Gallery • Commodities • Reach • Values • Team • Policies • Contact
+   - Sticky nav, scroll spy, smooth scrolling, glass cards, CTA widget, back-to-top
    - Easily retheme using the 'palette' object
    ========================================================= */
 
+/* --------------------------- GALLERY DATA --------------------------- */
+const galleryImages = [
+  {
+    id: 1,
+    src: mining1,
+    title: "Core Sampling Analysis",
+    category: "Field Work",
+  },
+  { id: 2, src: mining2, title: "Geological Mapping", category: "Exploration" },
+  { id: 3, src: mining3, title: "Diamond Drilling", category: "Drilling" },
+  { id: 4, src: mining4, title: "Site Investigation", category: "Field Work" },
+  { id: 5, src: mining5, title: "Resource Modeling", category: "Technical" },
+  { id: 6, src: mining6, title: "Team Planning", category: "Operations" },
+];
+
 export default function LeopardMining() {
   /* ------------------------------ THEME / BRAND ------------------------------ */
-  // Update these to align with brand guidelines when you have exact hex codes
   const palette = useMemo(
     () => ({
-      bg: "#0B0B0C", // near‑black canvas
+      bg: "#0B0B0C", // near-black canvas
       surface: "#111214", // card bg
       surfaceAlt: "#0f1115", // hero glass
       primary: "#D4AF37", // rich gold accent (leopard cue)
       primarySoft: "#f1e2a8", // soft gold for subtle accents
-      text: "#E7EAF0", // high‑contrast text
+      text: "#E7EAF0", // high-contrast text
       muted: "#A3A7B0", // body
       ring: "#2A2E36", // borders / dividers
       success: "#22C55E",
@@ -50,9 +77,9 @@ export default function LeopardMining() {
     hq: "Bulawayo, Zimbabwe",
     founded: "December 2021",
     blurb:
-      "Leopard Mining (Pvt) Ltd is a Zimbabwean geological consultancy delivering high‑quality, cost‑effective and technically sound solutions across Africa and beyond.",
+      "Leopard Mining (Pvt) Ltd is a Zimbabwean geological consultancy delivering high-quality, cost-effective and technically sound solutions across Africa and beyond.",
     mission:
-      "Provide world‑class geological and mining solutions built on integrity, innovation, collaboration and measurable client value.",
+      "Provide world-class geological and mining solutions built on integrity, innovation, collaboration and measurable client value.",
     vision: "To be a leading geological consultancy in Africa and beyond.",
   };
 
@@ -80,17 +107,17 @@ export default function LeopardMining() {
     {
       icon: <Compass className="w-5 h-5" />,
       title: "Exploration Management",
-      desc: "Targeting, program design, contractor supervision and on‑site leadership.",
+      desc: "Targeting, program design, contractor supervision and on-site leadership.",
     },
     {
       icon: <Briefcase className="w-5 h-5" />,
       title: "Feasibility Support",
-      desc: "Inputs for scoping/pre‑feasibility, technical assessments and risk registers.",
+      desc: "Inputs for scoping/pre-feasibility, technical assessments and risk registers.",
     },
     {
       icon: <Users className="w-5 h-5" />,
       title: "Project Design & Implementation",
-      desc: "From permits and tenement management to end‑to‑end field execution.",
+      desc: "From permits and tenement management to end-to-end field execution.",
     },
   ];
 
@@ -129,7 +156,7 @@ export default function LeopardMining() {
     },
     {
       title: "Adaptability",
-      desc: "Fit‑for‑purpose solutions across various terrains and jurisdictions.",
+      desc: "Fit-for-purpose solutions across various terrains and jurisdictions.",
     },
   ];
 
@@ -149,9 +176,12 @@ export default function LeopardMining() {
 
   /* ------------------------------- UX ENHANCERS ------------------------------ */
   const [active, setActive] = useState("hero");
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const sections = [
     { id: "about", label: "About" },
     { id: "services", label: "Services" },
+    { id: "gallery", label: "Gallery" },
     { id: "commodities", label: "Commodities" },
     { id: "reach", label: "Reach" },
     { id: "values", label: "Values" },
@@ -200,13 +230,56 @@ export default function LeopardMining() {
     </div>
   );
 
+  /* ------------------------------ IMAGE MODAL ------------------------------- */
+  const ImageModal = ({ image, onClose }) => (
+    <AnimatePresence>
+      {image && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: "rgba(0,0,0,0.9)" }}
+          onClick={onClose}
+        >
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 rounded-full"
+            style={{ background: "rgba(255,255,255,0.1)" }}
+          >
+            <X className="h-6 w-6" />
+          </button>
+          <motion.div
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0.9 }}
+            className="relative max-w-5xl max-h-[80vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={image.src}
+              alt={image.title}
+              className="w-full h-full object-contain rounded-2xl"
+            />
+            <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent rounded-b-2xl">
+              <h3 className="text-xl font-semibold">{image.title}</h3>
+              <p className="text-sm" style={{ color: palette.muted }}>
+                {image.category}
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+
   /* --------------------------------- RENDER --------------------------------- */
   return (
     <div
       style={{ background: palette.bg, color: palette.text }}
       className="min-h-screen"
     >
-      {/* Sticky, translucent top‑nav */}
+      {/* Sticky, translucent top-nav */}
       <header
         className="fixed inset-x-0 top-0 z-50 backdrop-blur-lg border-b"
         style={{ background: "rgba(15,16,18,0.6)", borderColor: palette.ring }}
@@ -262,26 +335,31 @@ export default function LeopardMining() {
       </header>
 
       {/* HERO */}
-      <section id="hero" className="relative pt-12">
+      <section id="hero" className="relative pt-28">
         {/* Ambient gradient glow */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0"
           style={{
             background:
               "radial-gradient(1000px 500px at 20% 10%, rgba(212,175,55,0.12), transparent 50%), radial-gradient(800px 400px at 80% 30%, rgba(241,226,168,0.08), transparent 55%)",
           }}
         />
-
-        <div className=" mx-auto max-w-7xl px-4">
+        <div className="mx-auto max-w-7xl px-4 ">
           <div
             className="relative overflow-hidden rounded-3xl border p-8 md:p-12 grid md:grid-cols-2 gap-8 items-center"
             style={{
-              background: `linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.00))`,
+              /* Background photo for the entire hero card */
+              backgroundImage: `url(${mineeng})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
               borderColor: palette.ring,
             }}
           >
-            <div>
+            {/* --- Overlay to darken the image: black at 30% --- */}
+            <div className="absolute inset-0 bg-black/80 pointer-events-none" />
+
+            {/* LEFT COLUMN (bring above overlay) */}
+            <div className="relative z-10">
               <div
                 className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs mb-4"
                 style={{
@@ -296,6 +374,7 @@ export default function LeopardMining() {
               <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
                 Geological consulting for Africa & beyond
               </h1>
+
               <p
                 className="mt-4 text-base sm:text-lg"
                 style={{ color: palette.muted }}
@@ -327,30 +406,24 @@ export default function LeopardMining() {
               </div>
             </div>
 
-            <div className="relative">
+            {/* RIGHT COLUMN (bring above overlay) */}
+            <div className="relative z-10">
               <div
-                className="aspect-[4/3] w-full rounded-2xl border"
-                style={{
-                  borderColor: palette.ring,
-                  background: palette.surface,
-                }}
+                className="relative aspect-[4/3] w-full rounded-2xl border overflow-hidden bg-transparent"
+                style={{ borderColor: palette.ring }}
               >
-                {/* Decorative blueprint style grid */}
+                {/* keep this empty (transparent) so the background image shows through */}
                 <div
-                  className="absolute inset-0 opacity-20"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)",
-                    backgroundSize: "28px 28px",
-                  }}
+                  className="absolute inset-0 transition-opacity bg-black/50 duration-500 pointer-events-none"
+                  style={{ backgroundImage: "none" }}
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center px-6">
-                    <Globe2 className="mx-auto h-10 w-10 mb-3" />
-                    <div className="font-semibold">Regional expertise</div>
+                    <Globe2 className="mx-auto  h-16 w-16 mb-3" />
+                    <div className="text-xl font-bold">Regional expertise</div>
                     <div
-                      className="text-sm mt-1"
-                      style={{ color: palette.muted }}
+                      className="text-sm text-white mt-1"
+                      // style={{ color: palette.muted }}
                     >
                       Zimbabwe • Namibia • South Sudan • Nigeria • DRC •
                       Mozambique • Australia
@@ -416,7 +489,7 @@ export default function LeopardMining() {
                 "Diamond/RC drilling supervision",
                 "Underground & surface mapping",
                 "Sampling & QAQC",
-                "Resource/ore‑body modelling",
+                "Resource/ore-body modelling",
                 "Project management & reporting",
                 "Geophysics",
                 "Drone surveys",
@@ -477,6 +550,77 @@ export default function LeopardMining() {
         </div>
       </section>
 
+      {/* GALLERY */}
+      <section
+        id="gallery"
+        className="py-16 border-t"
+        style={{ borderColor: palette.ring }}
+      >
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
+                Project Gallery
+              </h2>
+              <p className="mt-2 text-sm" style={{ color: palette.muted }}>
+                Visual insights into our geological consulting work
+              </p>
+            </div>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {galleryImages.map((image) => (
+              <motion.div
+                key={image.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="group cursor-pointer"
+                onClick={() => setSelectedImage(image)}
+              >
+                <div
+                  className="aspect-[4/3] rounded-2xl border overflow-hidden"
+                  style={{
+                    borderColor: palette.ring,
+                    background: palette.surface,
+                  }}
+                >
+                  <div className="h-full w-full relative">
+                    {image.src ? (
+                      <img
+                        src={image.src}
+                        alt={image.title}
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="h-full w-full flex items-center justify-center">
+                        <ImageIcon
+                          className="h-10 w-10"
+                          style={{ color: palette.muted }}
+                        />
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                      <div className="font-medium text-white">
+                        {image.title}
+                      </div>
+                      <div className="text-sm text-gray-300">
+                        {image.category}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        {/* Modal */}
+        <ImageModal
+          image={selectedImage}
+          onClose={() => setSelectedImage(null)}
+        />
+      </section>
+
       {/* COMMODITIES */}
       <section id="commodities" className="py-16">
         <div className="mx-auto max-w-7xl px-4">
@@ -485,7 +629,7 @@ export default function LeopardMining() {
               Commodities
             </h2>
             <p className="mt-2 text-sm" style={{ color: palette.muted }}>
-              Multi‑commodity experience across hard‑rock and industrial
+              Multi-commodity experience across hard-rock and industrial
               minerals.
             </p>
           </div>
@@ -579,18 +723,11 @@ export default function LeopardMining() {
                   background: palette.surface,
                 }}
               >
-                <div
-                  className="h-16 w-16 bg-[#111214] rounded-full grid place-items-center font-bold"
-                  style={{
-                    background: "#111214",
-                    color: palette.primary,
-                  }}
-                >
+                <div className="h-16 w-16 rounded-full overflow-hidden">
                   <img
-                    className="rounded-full bg-gray-300"
                     src={m.image}
-                    alt=""
-                    srcset=""
+                    alt={m.name}
+                    className="h-full w-full object-cover"
                   />
                 </div>
                 <div>
@@ -614,7 +751,7 @@ export default function LeopardMining() {
           >
             <h3 className="font-semibold text-lg">Staff Policy</h3>
             <p className="text-sm mt-2" style={{ color: palette.muted }}>
-              Equal‑opportunity employer with merit‑based recruitment and
+              Equal-opportunity employer with merit-based recruitment and
               advancement. We recognise and reward initiative, diligence and
               loyalty; decisions remain free from discrimination.
             </p>
@@ -626,8 +763,8 @@ export default function LeopardMining() {
             <h3 className="font-semibold text-lg">Client Policy</h3>
             <p className="text-sm mt-2" style={{ color: palette.muted }}>
               We honour contractual obligations and deliver services with
-              professionalism. Customer care and after‑sales support are
-              integral to long‑term relationships.
+              professionalism. Customer care and after-sales support are
+              integral to long-term relationships.
             </p>
           </div>
         </div>
@@ -640,19 +777,20 @@ export default function LeopardMining() {
         style={{ borderColor: palette.ring }}
       >
         <div className="mx-auto max-w-7xl px-4">
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
-                Let’s talk
-              </h2>
-              <p className="mt-2 text-sm" style={{ color: palette.muted }}>
-                Share your objectives and constraints—we’ll recommend a
-                pragmatic path to geological certainty.
-              </p>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
+            Let’s talk
+          </h2>
+          <p className="mt-2 text-sm" style={{ color: palette.muted }}>
+            Share your objectives and constraints—we’ll recommend a pragmatic
+            path to geological certainty.
+          </p>
 
+          <div className="grid lg:grid-cols-12 gap-8 mt-6">
+            {/* Enquiry form */}
+            <div className="lg:col-span-7">
               <form
                 onSubmit={(e) => e.preventDefault()}
-                className="mt-6 grid sm:grid-cols-2 gap-3 rounded-3xl border p-6"
+                className="grid grid-cols-1 gap-3 rounded-3xl border p-6"
                 style={{
                   borderColor: palette.ring,
                   background: palette.surface,
@@ -669,17 +807,18 @@ export default function LeopardMining() {
                   placeholder="Company"
                 />
                 <input
-                  className="rounded-xl px-3 py-2 bg-transparent border sm:col-span-2"
+                  className="rounded-xl px-3 py-2 bg-transparent border"
                   style={{ borderColor: palette.ring }}
                   placeholder="Email"
                 />
                 <textarea
-                  className="rounded-xl px-3 py-2 bg-transparent border sm:col-span-2"
+                  rows={4}
+                  className="rounded-xl px-3 py-2 bg-transparent border"
                   style={{ borderColor: palette.ring }}
                   placeholder="Project brief (targets, timeline, location)"
-                ></textarea>
+                />
                 <button
-                  className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 font-medium"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 font-medium w-full"
                   style={{ background: palette.primary, color: "#141414" }}
                 >
                   Send enquiry <ArrowRight className="h-4 w-4" />
@@ -687,7 +826,8 @@ export default function LeopardMining() {
               </form>
             </div>
 
-            <aside className="space-y-3">
+            {/* Contacts */}
+            <aside className="space-y-3 lg:col-span-5">
               <div
                 className="rounded-3xl border p-6"
                 style={{
@@ -762,7 +902,7 @@ export default function LeopardMining() {
             className="flex items-center gap-4 text-sm"
             style={{ color: palette.muted }}
           >
-            <span></span>
+            <span />
             <span>Developed by Rufaro Mucheri</span>
           </div>
         </div>
@@ -779,7 +919,7 @@ export default function LeopardMining() {
         </a>
       </div>
 
-      {/* Back‑to‑top */}
+      {/* Back-to-top */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         className="fixed left-4 bottom-4 rounded-full p-3 border"
