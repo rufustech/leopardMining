@@ -45,14 +45,19 @@ const galleryImages = [
   {
     id: 1,
     src: mining1,
-    title: "Core Sampling Analysis",
-    category: "Field Work",
+    title: "Soil sampling",
+    category: "Fieldwork",
   },
-  { id: 2, src: mining2, title: "Geological Mapping", category: "Exploration" },
-  { id: 3, src: mining3, title: "Diamond Drilling", category: "Drilling" },
-  { id: 4, src: mining4, title: "Site Investigation", category: "Field Work" },
-  { id: 5, src: mining5, title: "Resource Modeling", category: "Technical" },
-  { id: 6, src: mining6, title: "Team Planning", category: "Operations" },
+  {
+    id: 2,
+    src: mining2,
+    title: "Drone survey",
+    category: "Geological mapping",
+  },
+  { id: 3, src: mining3, title: "⁠Magnetic survey", category: "Geophysics" },
+  { id: 4, src: mining4, title: "⁠Electrical survey", category: "Geophysics" },
+  { id: 5, src: mining5, title: "XRF analysis", category: "Sample analysis" },
+  { id: 6, src: mining6, title: "⁠Channel sampling", category: "Geochemistry" },
 ];
 
 export default function LeopardMining() {
