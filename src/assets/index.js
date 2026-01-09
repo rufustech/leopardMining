@@ -1,6 +1,6 @@
 import sam from "./images/SAMPASSPORT.png";
 import edmore from "./images/edmorepassport.png";
-import munashe from "./images/munashePassport.png";
+// import munashe from "./images/munashePassport.png";
 import heropic from "./images/heropic.jpg";
 import mineeng from "./images/mineeng.jpg";
 import mining1 from "./images/mining1.jpg";
@@ -15,7 +15,7 @@ export {
   sam,
   edmore,
   logo2,
-  munashe,
+  // munashe,
   mining1,
   mining2,
   mining3,

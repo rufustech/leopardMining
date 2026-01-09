@@ -27,7 +27,7 @@ import {
   mining4,
   mining5,
   mining6,
-  munashe,
+  // munashe,
   sam,
 } from "../assets";
 
@@ -169,7 +169,6 @@ export default function LeopardMining() {
   const team = [
     { name: "Samuel Bakasa", role: "Director", image: sam },
     { name: "Edmore Marima", role: "Exploration Manager", image: edmore },
-    { name: "Munashe Mugwagwa", role: "Exploration Geologist", image: munashe },
   ];
 
   const contacts = {
@@ -719,7 +718,7 @@ export default function LeopardMining() {
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-6">
             Management
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-5">
             {team.map((m, idx) => (
               <div
                 key={`${m.name}-${idx}`}
