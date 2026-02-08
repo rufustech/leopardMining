@@ -29,6 +29,10 @@ import {
   mining6,
   // munashe,
   sam,
+  sergio,
+  sergioBush,
+  sergioBlk,
+  sergiohole,
 } from "../assets";
 
 /* =========================================================
@@ -58,6 +62,14 @@ const galleryImages = [
   { id: 4, src: mining4, title: "⁠Electrical survey", category: "Geophysics" },
   { id: 5, src: mining5, title: "XRF analysis", category: "Sample analysis" },
   { id: 6, src: mining6, title: "⁠Channel sampling", category: "Geochemistry" },
+  {
+    id: 7,
+    src: sergiohole,
+    title: "Geological mapping",
+    category: "Geological mapping",
+  },
+  { id: 8, src: sergioBush, title: "Exploration", category: "Exploration" },
+  { id: 9, src: sergioBlk, title: "Exploration", category: "Exploration" },
 ];
 
 export default function LeopardMining() {
@@ -75,7 +87,7 @@ export default function LeopardMining() {
       success: "#22C55E",
       warning: "#F59E0B",
     }),
-    []
+    [],
   );
 
   /* -------------------------------- CONTENT --------------------------------- */
@@ -169,6 +181,7 @@ export default function LeopardMining() {
   const team = [
     { name: "Samuel Bakasa", role: "Director", image: sam },
     { name: "Edmore Marima", role: "Exploration Manager", image: edmore },
+    { name: "Sergio de Souza", role: "Exploration Geologist", image: sergio },
   ];
 
   const contacts = {
@@ -718,7 +731,7 @@ export default function LeopardMining() {
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-6">
             Management
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {team.map((m, idx) => (
               <div
                 key={`${m.name}-${idx}`}

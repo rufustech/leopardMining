@@ -10,12 +10,16 @@ import mining4 from "./images/mining4.jpg";
 import mining5 from "./images/mining5.jpg";
 import mining6 from "./images/mining6.jpg";
 import logo2 from "./images/logo2.png";
+import sergio from "./images/Sergio.png";
+import sergioBush from "./images/sergiobush.png";
+import sergioBlk from "./images/sergioBlk.png";
+import sergiohole from "./images/sergiohole.png";
 
 export {
   sam,
   edmore,
   logo2,
-  // munashe,
+  sergio,
   mining1,
   mining2,
   mining3,
@@ -24,4 +28,7 @@ export {
   mining6,
   heropic,
   mineeng,
+  sergioBush,
+  sergioBlk,
+  sergiohole,
 };
